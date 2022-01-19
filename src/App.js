@@ -1,44 +1,68 @@
-import React from 'react';
-import './App.css';
-import styled from 'styled-components';
-
+import React from "react";
+import "./App.css";
+import styled from "styled-components";
 
 const CardContainer = styled.div`
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-row-gap: 16px;
-padding: 16px;
-`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 16px;
+  padding: 16px;
+  column-gap: 1em;
+`;
 
 const Card = styled.div`
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-border: 1px solid black;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+`;
 
 const CardTexto = styled.div`
-display:flex;
-flex-direction:column;
-padding: 16px;
-`
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+`;
 
 const ImgCard = styled.img`
-width: 200px;
-`
+  width: 200px;
+`;
 const Filtros = styled.div`
-display:flex;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+  border: 1px solid black;
+`;
+
+const TemplateMain = styled.div`
+display: grid;
+grid-template-columns: 1fr 2fr 1fr;
+row-gap: 16px;
+  padding: 16px;
+  column-gap: 2em;
+
+`
+
+const ContainerCarrinho = styled.div`
+display: flex;
 flex-direction:column;
-padding: 16px;
-width: 200px;
+border: 1px solid black;
+padding: 1em;
+
+`
+
+const CarrinhoTexto = styled.div`
+display:flex;
+justify-content: space-between;
+align-items: center
+
 `
 
 
 
 export default class App extends React.Component {
   state = {
-
     quantity: 0,
     adicionado: false,
 
@@ -47,25 +71,29 @@ export default class App extends React.Component {
         id: Date.now(),
         name: "Produto 1",
         value: 200,
-        imageUrl: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQWQ0nC7fKyJESpS6acSjoZEP0u5xVBGMoDR9Ea_vaYdKjTRB-GIdhqgMCKUODCB6zezITC1SEDUtyWtjKOUacOXCpluTbjNN_zTq4TN4Q21F5jTK3ZgtPi&usqp=CAE",
+        imageUrl:
+          "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQWQ0nC7fKyJESpS6acSjoZEP0u5xVBGMoDR9Ea_vaYdKjTRB-GIdhqgMCKUODCB6zezITC1SEDUtyWtjKOUacOXCpluTbjNN_zTq4TN4Q21F5jTK3ZgtPi&usqp=CAE",
       },
       {
         id: Date.now() + 1,
         name: "Produto 2",
         value: 150,
-        imageUrl: "https://image.shutterstock.com/image-vector/astronaut-holding-gun-illustration-t-600w-1898943952.jpg"
+        imageUrl:
+          "https://image.shutterstock.com/image-vector/astronaut-holding-gun-illustration-t-600w-1898943952.jpg",
       },
       {
         id: Date.now() + 2,
         name: "Produto 3",
         value: 250,
-        imageUrl: "https://image.shutterstock.com/image-vector/outerspace-adventure-outdoor-vintage-vector-600w-1491399221.jpg"
+        imageUrl:
+          "https://image.shutterstock.com/image-vector/outerspace-adventure-outdoor-vintage-vector-600w-1491399221.jpg",
       },
       {
         id: Date.now() + 3,
         name: "Produto 4",
         value: 300,
-        imageUrl: "https://image.shutterstock.com/image-vector/astronaut-ride-skateboard-vector-illustration-600w-1915910152.jpg"
+        imageUrl:
+          "https://image.shutterstock.com/image-vector/astronaut-ride-skateboard-vector-illustration-600w-1915910152.jpg",
       },
     ],
 
@@ -74,13 +102,12 @@ export default class App extends React.Component {
       minValue: 0,
       maxValue: 1000,
       name: "",
-    }
-
+    },
   };
 
   addToCart = (product) => {
     const { cart } = this.state;
-    const productExists = cart.find(p => p.id === product.id);
+    const productExists = cart.find((p) => p.id === product.id);
 
     if (productExists) {
       productExists.quantity += 1;
@@ -90,13 +117,14 @@ export default class App extends React.Component {
     }
 
     this.setState({ cart });
-  }
-
+  };
 
   totalValue = () => {
     const { cart } = this.state;
-    return cart.reduce((total, product) => total + product.value * product.quantity, 0);
-  
+    return cart.reduce(
+      (total, product) => total + product.value * product.quantity,
+      0
+    );
   };
 
   removeProductFromCart = (product) => {
@@ -116,9 +144,6 @@ export default class App extends React.Component {
     return products.sort((a, b) => b.value - a.value);
   };
 
-
-
-
   render() {
     const { products, filter } = this.state;
     const filteredProducts = products.filter((product) => {
@@ -130,11 +155,12 @@ export default class App extends React.Component {
     });
 
     return (
-      <div>
-        <div>
+      <TemplateMain>
+        
+        <Filtros>
+          <div>
           <h3> Filtros</h3>
         </div>
-        <Filtros>
           <h4>Valor mínimo</h4>
           <input
             type="number"
@@ -178,70 +204,72 @@ export default class App extends React.Component {
             }}
           />
           <h4>Ordem de preço</h4>
-          <select onChange={(e) => {
-            if (e.target.value === "Crescente") {
-              this.setState({ products: this.showProductsAscendingPriceOrder() });
-            } else {
-              this.setState({ products: this.showProductsDescendingPriceOrder() });
-            }
-          }}>
+          <select
+            onChange={(e) => {
+              if (e.target.value === "Crescente") {
+                this.setState({
+                  products: this.showProductsAscendingPriceOrder(),
+                });
+              } else {
+                this.setState({
+                  products: this.showProductsDescendingPriceOrder(),
+                });
+              }
+            }}
+          >
             <option value="Crescente">Crescente</option>
             <option value="Decrescente">Decrescente</option>
           </select>
-
         </Filtros>
-        <div>
+        
           <CardContainer>
             {filteredProducts.map((product) => {
               return (
                 <Card>
                   <div>
-                  <ImgCard src={product.imageUrl}/>
+                    <ImgCard src={product.imageUrl} />
                   </div>
                   <CardTexto>
-                  <p>{product.name}</p>
-                  <p>R$ {product.value}</p>
+                    <p>{product.name}</p>
+                    <p>R$ {product.value}</p>
 
-                  <button onClick={() => this.addToCart(product)}>Adicionar ao carrinho</button>
+                    <button onClick={() => this.addToCart(product)}>
+                      Adicionar ao carrinho
+                    </button>
                   </CardTexto>
                 </Card>
               );
             })}
           </CardContainer>
-        </div>
+        
 
-        <div>
-          <h3>Carrinho</h3>
-        </div>
-            
-        <CardContainer>
-            {this.state.cart.map((product) => {
-              return (
-                <Card>
-                  <div>
-                  {/* <ImgCard src={product.imageUrl}/> */}
+        <ContainerCarrinho>
+          <h3>Carrinho:</h3>
 
+{this.state.cart.map((product) => {
+            return (
+              <div>
 
-        </div>
-            
-                  <CardTexto>
+                <CarrinhoTexto>
+                <p>{product.quantity}x</p>
                   <p>{product.name}</p>
-                  <p>Quantidade: {product.quantity}</p>
-                  <p>R$ {product.value}</p>
-                  <button onClick={() => this.removeProductFromCart(product)}>Remover do carrinho</button>
                   
-                  </CardTexto>
-                </Card>
-    );
-  })}
-          </CardContainer>
-          <p>Total: R$ {this.totalValue()}</p>
+                  <p>R$ {product.value}</p>
+                  <button onClick={() => this.removeProductFromCart(product)}>
+                    Remover do carrinho
+                  </button>
+                </CarrinhoTexto>
+              </div>
+            );
+          })}
 
-        </div>
+<p>Total: R$ {this.totalValue()}</p>
+
+        </ContainerCarrinho>
+
       
+        
+      </TemplateMain>
     );
-
-    
-
-}
+  }
 }
