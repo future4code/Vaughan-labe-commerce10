@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import styled from 'styled-components';
-import { CardProduto } from './components/CardProduto';
+//import { CardProduto } from './components/CardProduto';
 
 const CardContainer = styled.div`
 display: grid;
@@ -27,7 +27,12 @@ padding: 16px;
 const ImgCard = styled.img`
 width: 200px;
 `
-
+const Filtros = styled.div`
+display:flex;
+flex-direction:column;
+padding: 16px;
+width: 200px;
+`
 
 
 
@@ -41,10 +46,22 @@ export default class App extends React.Component {
         imageUrl: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQWQ0nC7fKyJESpS6acSjoZEP0u5xVBGMoDR9Ea_vaYdKjTRB-GIdhqgMCKUODCB6zezITC1SEDUtyWtjKOUacOXCpluTbjNN_zTq4TN4Q21F5jTK3ZgtPi&usqp=CAE",
       },
       {
-        id: Date.now(),
+        id: Date.now() + 1,
         name: "Produto 2",
         value: 150,
-        imageUrl: "https://picsum.photos/id/15/200/150"
+        imageUrl: "https://image.shutterstock.com/image-vector/astronaut-holding-gun-illustration-t-600w-1898943952.jpg"
+      },
+      {
+        id: Date.now() + 2,
+        name: "Produto 3",
+        value: 250,
+        imageUrl: "https://image.shutterstock.com/image-vector/outerspace-adventure-outdoor-vintage-vector-600w-1491399221.jpg"
+      },
+      {
+        id: Date.now() + 3,
+        name: "Produto 4",
+        value: 300,
+        imageUrl: "https://image.shutterstock.com/image-vector/astronaut-ride-skateboard-vector-illustration-600w-1915910152.jpg"
       },
     ],
 
@@ -56,110 +73,158 @@ export default class App extends React.Component {
     }
   };
 
-  CardProduto = () => {
-  const listaDeProdutos = this.state.products.map((product) => {
-    return (
-      <CardProduto
-        key={product.id}
-        nome={product.name}
-        preco={product.value}
-        endereco={product.imageUrl}
-      />
-    )
-  }); return listaDeProdutos
-}
+  addPriceAndProductToCart = (product) => {
+    const { cart } = this.state;
+    const newCart = [...cart];
+    newCart.push({
+      ...product,
+      price: product.value,
+    });
+    this.setState({ cart: newCart });
+  };
+
+  totalValue = () => {
+    const { cart } = this.state;
+    return cart.reduce((acc, product) => acc + product.value, 0);
+  };
+
+  removeProductFromCart = (product) => {
+    const { cart } = this.state;
+    const newCart = [...cart];
+    newCart.splice(newCart.indexOf(product), 1);
+    this.setState({ cart: newCart });
+  };
+
+  showProductsAscendingPriceOrder = () => {
+    const { products } = this.state;
+    return products.sort((a, b) => a.value - b.value);
+  };
+
+  showProductsDescendingPriceOrder = () => {
+    const { products } = this.state;
+    return products.sort((a, b) => b.value - a.value);
+  };
 
   render() {
-
-    
+    const { products, filter } = this.state;
+    const filteredProducts = products.filter((product) => {
+      return (
+        product.value >= filter.minValue &&
+        product.value <= filter.maxValue &&
+        product.name.toLowerCase().includes(filter.name.toLowerCase())
+      );
+    });
 
     return (
       <div>
         <div>
           <h3> Filtros</h3>
         </div>
-        <div>
+        <Filtros>
+          <h4>Valor mínimo</h4>
           <input
             type="number"
             placeholder="Valor mínimo"
-            value={this.state.filter.minValue}
+            value={filter.minValue}
             onChange={(e) => {
               this.setState({
                 filter: {
-                  ...this.state.filter,
+                  ...filter,
                   minValue: e.target.value,
                 },
               });
-            }
-            }
+            }}
           />
+          <h4>Valor máximo</h4>
           <input
             type="number"
             placeholder="Valor máximo"
-            value={this.state.filter.maxValue}
+            value={filter.maxValue}
             onChange={(e) => {
               this.setState({
                 filter: {
-                  ...this.state.filter,
+                  ...filter,
                   maxValue: e.target.value,
                 },
               });
-            }
-            }
+            }}
           />
+          <h4>Nome do produto</h4>
           <input
             type="text"
             placeholder="Nome do produto"
-            value={this.state.filter.name}
+            value={filter.name}
             onChange={(e) => {
               this.setState({
                 filter: {
-                  ...this.state.filter,
+                  ...filter,
                   name: e.target.value,
                 },
               });
-            }
-            }
+            }}
           />
-
-        </div>
-
+          <h4>Ordem de preço</h4>
+          <select onChange={(e) => {
+            if (e.target.value === "Crescente") {
+              this.setState({ products: this.showProductsAscendingPriceOrder() });
+            } else {
+              this.setState({ products: this.showProductsDescendingPriceOrder() });
+            }
+          }}>
+            <option value="Crescente">Crescente</option>
+            <option value="Decrescente">Decrescente</option>
+          </select>
+        </Filtros>
         <div>
-          <div>
-            <p>Quantidade de produtos:</p>
-            <label>Ordenação</label>
-            <select>
-              <option>Crescente</option>
-              <option>Decrescente</option>
-            </select>
-
-          </div>
-
-          {CardProduto()}
-
           <CardContainer>
-            <Card>
-              <div>
-                <ImgCard src={this.endereco} />
-              </div>
-
-              <CardTexto>
-                <p>{this.nome}</p>
-                <p>R$:{this.preco}</p>
-                <button onClick={this.adicionarAoCarrinho()}>Adicionar ao carrinho</button>
-              </CardTexto>
-            </Card>
+            {filteredProducts.map((product) => {
+              return (
+                <Card>
+                  <div>
+                  <ImgCard src={product.imageUrl}/>
+                  </div>
+                  <CardTexto>
+                  <p>{product.name}</p>
+                  <p>R$ {product.value}</p>
+                  <button onClick={() => this.addPriceAndProductToCart(product)}>Adicionar ao carrinho</button>
+                  </CardTexto>
+                </Card>
+              );
+            })}
           </CardContainer>
-
         </div>
 
         <div>
           <h3>Carrinho</h3>
         </div>
+            
+        <CardContainer>
+            {this.state.cart.map((product) => {
+              return (
+                <Card>
+                  <div>
+                  <ImgCard src={product.imageUrl}/>
 
-      </div>
 
+        </div>
+            
+                  <CardTexto>
+                  <p>{product.name}</p>
+                  <p>R$ {product.value}</p>
+                  <button onClick={() => this.removeProductFromCart(product)}>Remover do carrinho</button>
+                  
+                  </CardTexto>
+                </Card>
     );
-  }
+  })}
+          </CardContainer>
+          <p>Total: R$ {this.totalValue()}</p>
+
+        </div>
+    );
+
+    
+
+}
 }
 
