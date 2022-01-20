@@ -1,63 +1,10 @@
 import React from "react";
 import "./App.css";
-import styled from "styled-components";
+import { CardContainer, Card, CardTexto, ImgCard, Filtros, TemplateMain, ContainerCarrinho, CarrinhoTexto, TotalItens, BtnAdicionar, BtnRemover, BodyContainer, LogoLab, IconeTexto, InputBusca, Footer} from "./style";
+import LogoAstro from "./img/LabSpace.jpg"
+import insta from "./img/insta.svg"
+import facebook from "./img/facebook.svg"
 
-const CardContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 16px;
-  padding: 16px;
-  column-gap: 1em;
-`;
-
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-`;
-
-const CardTexto = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-`;
-
-const ImgCard = styled.img`
-  width: 200px;
-`;
-const Filtros = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  width: 100%;
-  border: 1px solid black;
-`;
-
-const TemplateMain = styled.div`
-display: grid;
-grid-template-columns: 1fr 2fr 1fr;
-row-gap: 16px;
-  padding: 16px;
-  column-gap: 2em;
-
-`
-
-const ContainerCarrinho = styled.div`
-display: flex;
-flex-direction:column;
-border: 1px solid black;
-padding: 1em;
-
-`
-
-const CarrinhoTexto = styled.div`
-display:flex;
-justify-content: space-between;
-align-items: center
-
-`
 
 
 
@@ -68,29 +15,29 @@ export default class App extends React.Component {
 
     products: [
       {
-        id: Date.now(),
-        name: "Produto 1",
-        value: 200,
-        imageUrl:
-          "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQWQ0nC7fKyJESpS6acSjoZEP0u5xVBGMoDR9Ea_vaYdKjTRB-GIdhqgMCKUODCB6zezITC1SEDUtyWtjKOUacOXCpluTbjNN_zTq4TN4Q21F5jTK3ZgtPi&usqp=CAE",
-      },
-      {
-        id: Date.now() + 1,
-        name: "Produto 2",
+        id: 1,
+        name: "Camiseta Universo",
         value: 150,
         imageUrl:
           "https://image.shutterstock.com/image-vector/astronaut-holding-gun-illustration-t-600w-1898943952.jpg",
       },
       {
-        id: Date.now() + 2,
-        name: "Produto 3",
+        id: 2,
+        name: "Camiseta Astronauta",
+        value: 150,
+        imageUrl:
+          "https://image.shutterstock.com/image-vector/astronaut-holding-gun-illustration-t-600w-1898943952.jpg",
+      },
+      {
+        id: 3,
+        name: "Camiseta Astronauta ",
         value: 250,
         imageUrl:
           "https://image.shutterstock.com/image-vector/outerspace-adventure-outdoor-vintage-vector-600w-1491399221.jpg",
       },
       {
         id: Date.now() + 3,
-        name: "Produto 4",
+        name: "Camiseta Astronauta Skatista",
         value: 300,
         imageUrl:
           "https://image.shutterstock.com/image-vector/astronaut-ride-skateboard-vector-illustration-600w-1915910152.jpg",
@@ -99,14 +46,17 @@ export default class App extends React.Component {
 
     cart: [],
     filter: {
-      minValue: 0,
-      maxValue: 1000,
       name: "",
     },
+    queryName: "",
+    minValue: "",
+    maxValue: "",
   };
 
+
+
   addToCart = (product) => {
-    const { cart } = this.state;
+    const cart = this.state.cart
     const productExists = cart.find((p) => p.id === product.id);
 
     if (productExists) {
@@ -144,132 +94,179 @@ export default class App extends React.Component {
     return products.sort((a, b) => b.value - a.value);
   };
 
+
+  updateMinValue = (event) => {
+    this.setState({
+      minValue: event.target.value
+    })
+  }
+
+  updateMaxValue = (event) => {
+    this.setState({
+      maxValue: event.target.value
+    })
+  }
+
+  updateQueryName = (event) => {
+    this.setState({
+      queryName: event.target.value
+    })
+  }
+
   render() {
-    const { products, filter } = this.state;
-    const filteredProducts = products.filter((product) => {
+    //const { products, filter } = this.state;
+   /* const filteredProducts = products.filter((product) => {
       return (
         product.value >= filter.minValue &&
         product.value <= filter.maxValue &&
         product.name.toLowerCase().includes(filter.name.toLowerCase())
       );
-    });
+    });*/
+
+    //const quantidadeItens = products.length
 
     return (
-      <TemplateMain>
-        
-        <Filtros>
-          <div>
-          <h3> Filtros</h3>
-        </div>
-          <h4>Valor mínimo</h4>
-          <input
-            type="number"
-            placeholder="Valor mínimo"
-            value={filter.minValue}
-            onChange={(e) => {
-              this.setState({
-                filter: {
-                  ...filter,
-                  minValue: e.target.value,
-                },
-              });
-            }}
-          />
-          <h4>Valor máximo</h4>
-          <input
-            type="number"
-            placeholder="Valor máximo"
-            value={filter.maxValue}
-            onChange={(e) => {
-              this.setState({
-                filter: {
-                  ...filter,
-                  maxValue: e.target.value,
-                },
-              });
-            }}
-          />
-          <h4>Nome do produto</h4>
-          <input
-            type="text"
-            placeholder="Nome do produto"
-            value={filter.name}
-            onChange={(e) => {
-              this.setState({
-                filter: {
-                  ...filter,
-                  name: e.target.value,
-                },
-              });
-            }}
-          />
-          <h4>Ordem de preço</h4>
-          <select
-            onChange={(e) => {
-              if (e.target.value === "Crescente") {
-                this.setState({
-                  products: this.showProductsAscendingPriceOrder(),
-                });
-              } else {
-                this.setState({
-                  products: this.showProductsDescendingPriceOrder(),
-                });
-              }
-            }}
-          >
-            <option value="Crescente">Crescente</option>
-            <option value="Decrescente">Decrescente</option>
-          </select>
-        </Filtros>
-        
-          <CardContainer>
-            {filteredProducts.map((product) => {
-              return (
-                <Card>
-                  <div>
-                    <ImgCard src={product.imageUrl} />
-                  </div>
-                  <CardTexto>
-                    <p>{product.name}</p>
-                    <p>R$ {product.value}</p>
+      <BodyContainer>
+        <header>
+          <IconeTexto>
+          <LogoLab src={LogoAstro} />
+            {/* <h2>LabSpace</h2> */}
+          </IconeTexto>
 
-                    <button onClick={() => this.addToCart(product)}>
-                      Adicionar ao carrinho
-                    </button>
-                  </CardTexto>
-                </Card>
+          <Filtros>
+            <div>
+
+              <InputBusca
+
+                type="number"
+                placeholder="Preço mínimo"
+                value={this.state.minValue}
+                onChange={this.updateMinValue}
+              />
+
+              <InputBusca
+                type="number"
+                placeholder="Valor máximo"
+                value={this.state.maxValue}
+                onChange={this.updateMaxValue}
+
+              />
+
+              <InputBusca
+                type="text"
+                placeholder="Nome do produto"
+                value={this.state.queryName}
+                onChange={this.updateQueryName}    
+            />
+
+              <select
+                onChange={(e) => {
+                  if (e.target.value === "Crescente") {
+                    this.setState({
+                      products: this.showProductsAscendingPriceOrder(),
+                    });
+                  } else {
+                    this.setState({
+                      products: this.showProductsDescendingPriceOrder(),
+                    });
+                  }
+                }}
+              >
+                <option value="Crescente">Crescente</option>
+                <option value="Decrescente">Decrescente</option>
+              </select>
+            </div>
+          </Filtros>
+
+        </header>
+
+        <TemplateMain>
+
+
+
+          <TotalItens>
+            
+
+            <CardContainer>
+
+              {this.state.products
+                .filter(product => {
+                  return product.name.toLowerCase().includes(this.state.queryName.toLowerCase())
+                })
+                .filter(product => {
+                  return this.state.minValue === "" || product.value >= this.state.minValue
+                })
+                .filter(product => {
+                  return this.state.maxValue === "" || product.value <= this.state.maxValue
+                })
+                .map(product => {
+                  return <Card>
+                    <div>
+                      <ImgCard src={product.imageUrl} />
+                    </div>
+                    <CardTexto>
+                      <p>{product.name}</p>
+                      <p>R$ {product.value}</p>
+
+                      <BtnAdicionar onClick={() => this.addToCart(product)}>
+                        Adicionar ao carrinho
+                      </BtnAdicionar>
+                    </CardTexto>
+                  </Card>
+                })}
+            </CardContainer>
+          </TotalItens>
+
+          <ContainerCarrinho>
+            <h3> 🛒 Carrinho:</h3>
+
+            {this.state.cart.map((product) => {
+              return (
+                <div>
+
+                  <CarrinhoTexto>
+                    <p>{product.quantity}x</p>
+                    <p>{product.name}</p>
+
+                    <p>R$ {product.value}</p>
+                    <BtnRemover onClick={() => this.removeProductFromCart(product)}>
+                      X
+                    </BtnRemover>
+                  </CarrinhoTexto>
+                </div>
               );
             })}
-          </CardContainer>
-        
 
-        <ContainerCarrinho>
-          <h3>Carrinho:</h3>
+            <p>Total: R$ {this.totalValue()}</p>
 
-{this.state.cart.map((product) => {
-            return (
-              <div>
+          </ContainerCarrinho>
 
-                <CarrinhoTexto>
-                <p>{product.quantity}x</p>
-                  <p>{product.name}</p>
-                  
-                  <p>R$ {product.value}</p>
-                  <button onClick={() => this.removeProductFromCart(product)}>
-                    Remover do carrinho
-                  </button>
-                </CarrinhoTexto>
-              </div>
-            );
-          })}
 
-<p>Total: R$ {this.totalValue()}</p>
 
-        </ContainerCarrinho>
+        </TemplateMain>
+        <Footer>
+          <div className="institucional">
+            <h4>Institucional</h4>
+            <a href="#">Sobre nós</a>
+          </div>
+          <div className="contato">
+            <h4>Contato</h4>
+            <a href="#">Fale conosco</a>
+            <a href="#">Dúvidas</a>
+          </div>
 
-      
-        
-      </TemplateMain>
+          <div className="redes-sociais">
+            <h4>Redes Sociais</h4>
+            <a href="https://facebook.com">
+              <img src={facebook} alt="facebook" />
+            </a>
+
+            <a href="https://instagram.com">
+            <img src={insta} alt="instagram" />
+            </a>
+          </div>
+        </Footer>
+      </BodyContainer>
     );
   }
 }
