@@ -40,23 +40,31 @@ export const ImgCard = styled.img`
 `;
 export const Filtros = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   padding: 16px;
-  width: 100%;
- 
-  
 `;
+
 export const InputBusca = styled.input`
   margin-right: 3%;
+  border: 2px solid rgb(102, 87, 178);
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 2px 2px 5px #70DFEF;
 ` 
 
 export const TemplateMain = styled.div`
 display: grid;
-grid-template-columns: 1fr 200px;
+grid-template-columns: 2.5fr 1fr;
   
   padding: 16px;
   column-gap: 2em;
   flex-grow: 1;
+  background-image: url("https://cdn1.iconfinder.com/data/icons/out-of-the-world/512/planet_earth_venues_univearse-512.png"), url("https://cdn1.iconfinder.com/data/icons/out-of-the-world/512/planet_earth_venues_univearse_saturn-512.png"), url("https://cdn1.iconfinder.com/data/icons/out-of-the-world/512/planet_univearse_telestial_space_mars-512.png"), url("https://cdn1.iconfinder.com/data/icons/out-of-the-world/512/planet_univearse_telestial_space_pluto-512.png"), url("https://cdn1.iconfinder.com/data/icons/out-of-the-world/512/planet_univearse_telestial_space-512.png"), url("https://cdn1.iconfinder.com/data/icons/out-of-the-world/512/planet_earth_venues_univearse_mars-512.png"), url("https://cdn1.iconfinder.com/data/icons/out-of-the-world/512/planet_earth_venues_univearse_pluto-512.png"), url("https://cdn1.iconfinder.com/data/icons/out-of-the-world/512/planet_earth_venues_univearse_jupiter-512.png");
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position-y: 10px, 70px, 130px, 200px, 270px, 350px, 430px, 520px, 570px;
+  background-position-x: right, right, right, right, right, right, right, right;
   
 
 `
@@ -69,6 +77,17 @@ padding: 1em;
 height: 80%;
 background-color: #1E1E1E;
 color: white;
+box-shadow: 2px 2px 5px #70DFEF;
+opacity: 0.2;
+
+h3{
+  display: flex;
+  justify-content: center;
+}
+
+&:hover{
+  opacity: 1;
+  transition: 0.5s;
 
 `
 
@@ -88,6 +107,7 @@ export const IconeTexto = styled.div`
   background-color: #1E1E1E;
   color: white;
   justify-content: center;
+  box-shadow: 2px 2px 5px #70DFEF;
 
 `
 
@@ -130,9 +150,9 @@ export const Footer = styled.div`
 grid-row-start: 3;
 display:flex;
 flex-direction: row;
-grid-row-gap: 16px;
-grid-column-gap: 2em;
-grid-row-gap: 16px;
+justify-content: space-evenly;
+grid-row-gap: 10px;
+/* grid-column-gap: 2em; */
 padding: 16px;
 background-color: #1E1E1E;
 
@@ -154,7 +174,7 @@ h4{
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    gap: 16px;
+    gap: 10px;
 }
 
 .redes-sociais{
@@ -162,7 +182,7 @@ h4{
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    gap: 16px;
+    gap: 10px;
 }
 
 .institucional{
@@ -170,7 +190,7 @@ h4{
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    gap: 16px;
+    gap: 10px;
 
 p{
     color: rgb(255, 0, 208);

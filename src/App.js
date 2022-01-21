@@ -114,27 +114,16 @@ export default class App extends React.Component {
   }
 
   render() {
-    //const { products, filter } = this.state;
-   /* const filteredProducts = products.filter((product) => {
-      return (
-        product.value >= filter.minValue &&
-        product.value <= filter.maxValue &&
-        product.name.toLowerCase().includes(filter.name.toLowerCase())
-      );
-    });*/
-
-    //const quantidadeItens = products.length
 
     return (
       <BodyContainer>
         <header>
           <IconeTexto>
           <LogoLab src={LogoAstro} />
-            {/* <h2>LabSpace</h2> */}
           </IconeTexto>
 
           <Filtros>
-            <div>
+            {/* <div> */}
 
               <InputBusca
 
@@ -175,7 +164,7 @@ export default class App extends React.Component {
                 <option value="Crescente">Crescente</option>
                 <option value="Decrescente">Decrescente</option>
               </select>
-            </div>
+            {/* </div> */}
           </Filtros>
 
         </header>
@@ -218,7 +207,7 @@ export default class App extends React.Component {
           </TotalItens>
 
           <ContainerCarrinho>
-            <h3> 🛒 Carrinho:</h3>
+            <h3><span>🛒</span> Carrinho:</h3>
 
             {this.state.cart.map((product) => {
               return (
