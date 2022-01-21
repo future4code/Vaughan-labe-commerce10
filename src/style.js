@@ -38,7 +38,7 @@ export const Card = styled.div`
   border-radius: 10px;
   
   &:hover {
-    box-shadow: 2px 2px 5px darkgrey;
+    box-shadow: 2px 2px 5px #70DFEF;
 }
 `;
 
