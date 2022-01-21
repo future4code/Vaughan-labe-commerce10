@@ -78,7 +78,8 @@ height: 80%;
 background-color: #1E1E1E;
 color: white;
 box-shadow: 2px 2px 5px #70DFEF;
-opacity: 0.2;
+opacity: 0.6;
+color: black;
 
 h3{
   display: flex;
@@ -86,6 +87,7 @@ h3{
 }
 
 &:hover{
+  color: white;
   opacity: 1;
   transition: 0.5s;
 
