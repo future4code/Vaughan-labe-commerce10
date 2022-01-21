@@ -4,7 +4,8 @@ import { CardContainer, Card, CardTexto, ImgCard, Filtros, TemplateMain, Contain
 import LogoAstro from "./img/LabSpace.jpg"
 import insta from "./img/insta.svg"
 import facebook from "./img/facebook.svg"
-
+import search from "./img/search.png"
+import PaginaAgradecimento from "./PaginaAgradecimento";
 
 
 
@@ -19,7 +20,7 @@ export default class App extends React.Component {
         name: "Camiseta Universo",
         value: 150,
         imageUrl:
-          "https://image.shutterstock.com/image-vector/astronaut-holding-gun-illustration-t-600w-1898943952.jpg",
+          "https://image.shutterstock.com/image-vector/spaceman-universe-print-tshirts-another-600w-1295240857.jpg",
       },
       {
         id: 2,
@@ -42,6 +43,20 @@ export default class App extends React.Component {
         imageUrl:
           "https://image.shutterstock.com/image-vector/astronaut-ride-skateboard-vector-illustration-600w-1915910152.jpg",
       },
+      {
+        id: Date.now() + 4,
+        name: "Camiseta Astronauta Planeta",
+        value: 350,
+        imageUrl:
+        "https://image.shutterstock.com/image-vector/astronaut-print-tshirts-another-trendy-600w-1294063321.jpg",
+      },
+      {
+        id: Date.now() + 5,
+        name: "Camiseta Astronauta Triangulo",
+        value: 400,
+        imageUrl:
+        "https://image.shutterstock.com/image-vector/astronaut-space-cosmonaut-deep-universe-600w-1307705578.jpg",
+      }
     ],
 
     cart: [],
@@ -53,6 +68,9 @@ export default class App extends React.Component {
     maxValue: "",
   };
 
+  alertAgradecimento = () => {
+    alert("Obrigado por comprar na LabSpace!");
+  };
 
 
   addToCart = (product) => {
@@ -67,6 +85,8 @@ export default class App extends React.Component {
     }
 
     this.setState({ cart });
+    
+    
   };
 
   totalValue = () => {
@@ -115,6 +135,7 @@ export default class App extends React.Component {
 
   render() {
 
+
     return (
       <BodyContainer>
         <header>
@@ -141,12 +162,15 @@ export default class App extends React.Component {
 
               />
 
+              <div className="search-bar">
+                
               <InputBusca
                 type="text"
                 placeholder="Nome do produto"
                 value={this.state.queryName}
                 onChange={this.updateQueryName}    
             />
+            </div>
 
               <select
                 onChange={(e) => {
@@ -221,12 +245,15 @@ export default class App extends React.Component {
                     <BtnRemover onClick={() => this.removeProductFromCart(product)}>
                       X
                     </BtnRemover>
-                  </CarrinhoTexto>
+                  </CarrinhoTexto>              
                 </div>
               );
             })}
 
             <p>Total: R$ {this.totalValue()}</p>
+            <button onClick={this.alertAgradecimento}>
+                    Finalizar Compra
+                  </button>
 
           </ContainerCarrinho>
 
