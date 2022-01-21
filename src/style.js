@@ -7,13 +7,28 @@ grid-column: 1/-1;
 export const BodyContainer = styled.div`
   display: grid;
   grid-template-rows: 150px 1fr 200px;
+
+
+  @media (max-width: 600px) {
+    grid-template-rows: 300px 1fr 200px;
+  }
+
 `
 export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 16px;
   column-gap: 1em;
-`;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+`
 
 export const Card = styled.div`
   display: flex;
@@ -44,6 +59,11 @@ export const Filtros = styled.div`
   flex-direction: row;
   justify-content: space-around;
   padding: 16px;
+
+  @media (max-width: 600px) {
+    flex-direction:column;
+  }
+
 `;
 
 export const InputBusca = styled.input`
@@ -57,6 +77,10 @@ export const InputBusca = styled.input`
     outline: none;
   }
 
+  @media (max-width: 600px) {
+    width: 100%;
+    margin-bottom: 1%;
+  }
 ` 
 
 export const TemplateMain = styled.div`
@@ -71,7 +95,11 @@ grid-template-columns: 2.5fr 1fr;
   background-repeat: no-repeat;
   background-position-y: 10px, 70px, 130px, 200px, 270px, 350px, 430px, 520px, 570px;
   background-position-x: right, right, right, right, right, right, right, right;
-  
+
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 
 `
 
@@ -96,7 +124,7 @@ h3{
   color: white;
   opacity: 1;
   transition: 0.5s;
-
+}
 `
 
 export const CarrinhoTexto = styled.div`
@@ -199,7 +227,7 @@ h4{
     align-items: center;
     /* justify-content: center; */
     gap: 10px;
-
+}
 p{
     color: rgb(255, 0, 208);
 }
