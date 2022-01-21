@@ -35,6 +35,7 @@ export const CardTexto = styled.div`
 
 export const ImgCard = styled.img`
   width: 100%;
+  height: 150px;
   border-radius: 10px;
   
 `;
@@ -51,6 +52,11 @@ export const InputBusca = styled.input`
   border-radius: 10px;
   padding: 5px;
   box-shadow: 2px 2px 5px #70DFEF;
+
+  &:focus {
+    outline: none;
+  }
+
 ` 
 
 export const TemplateMain = styled.div`
