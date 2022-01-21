@@ -10,5 +10,5 @@ Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app
 5. Footer com links para o Institucional, Fale Conosco e Redes Sociais.
 6. Carrinho com opacidade baixa até passar com o mouse por cima, com transição suave.
 
-##Prints:
+## Prints:
 ![alt text](https://i.postimg.cc/sXJKbpSS/labspace.png)
