@@ -109,10 +109,11 @@ flex-direction:column;
 border-radius: 10px;
 padding: 1em;
 height: 80%;
-background-color: #1E1E1E;
+background: rgba(255,255,255, 0.1);
+backdrop-filter: blur( 10px);
+-webkit-backdrop-filter: blur(10px);
 color: white;
 box-shadow: 2px 2px 5px #70DFEF;
-opacity: 0.6;
 color: black;
 
 h3{
@@ -121,9 +122,12 @@ h3{
 }
 
 &:hover{
-  color: white;
-  opacity: 1;
-  transition: 0.5s;
+  
+  transition: 0.3s;
+  color:white;
+  background-color: #1E1E1E;
+
+  
 }
 `
 
@@ -182,6 +186,21 @@ font-weight: 500;
 }
 
 `
+
+export const BtnComprar = styled.button `
+background-color: #6657b2;
+color: white;
+border-radius: 8px;
+padding: 5px;
+border: none;
+font-weight: 500;
+
+&:hover {
+  background-color: #463b81;
+}
+
+`
+
 export const Footer = styled.div`
 grid-row-start: 3;
 display:flex;

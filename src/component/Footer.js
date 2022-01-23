@@ -8,12 +8,11 @@ const FooterContainer = styled.div`
 grid-row-start: 3;
 display:flex;
 flex-direction: row;
-grid-row-gap: 16px;
-grid-column-gap: 2em;
-grid-row-gap: 16px;
+justify-content: space-evenly;
+grid-row-gap: 10px;
+/* grid-column-gap: 2em; */
 padding: 16px;
 background-color: #1E1E1E;
-
 a{
     text-decoration: none;
     color: white;
@@ -32,7 +31,7 @@ h4{
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    gap: 16px;
+    gap: 10px;
 }
 
 .redes-sociais{
@@ -40,7 +39,7 @@ h4{
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    gap: 16px;
+    gap: 10px;
 }
 
 .institucional{
@@ -48,7 +47,7 @@ h4{
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    gap: 16px;
+    gap: 10px;
 }
 p{
     color: rgb(255, 0, 208);
