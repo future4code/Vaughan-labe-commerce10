@@ -1,6 +1,7 @@
 Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
 
-# Link do Surge: http://light-scale.surge.sh/
+# Link do Surge: bloody-cracker.surge.sh
+
 
 ## Funcionalidades atuais:
 1. Filtrar produtos por preço, por ordem crescente e decrescente de preço e pelo nome do Produto.
