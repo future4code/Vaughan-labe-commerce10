@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
-import { CardContainer, Card, CardTexto, ImgCard, Filtros, TemplateMain, ContainerCarrinho, CarrinhoTexto, TotalItens, BtnAdicionar, BtnRemover, BodyContainer, LogoLab, IconeTexto, InputBusca, Footer} from "./style";
+import { CardContainer, Card, CardTexto, ImgCard, Filtros, TemplateMain, ContainerCarrinho, CarrinhoTexto, TotalItens, BtnAdicionar, BtnRemover, BtnComprar ,BodyContainer, LogoLab, IconeTexto, InputBusca} from "./style";
 import LogoAstro from "./img/LabSpace.jpg"
 import insta from "./img/insta.svg"
 import facebook from "./img/facebook.svg"
 import search from "./img/search.png"
 import PaginaAgradecimento from "./PaginaAgradecimento";
+import { Footer } from "./component/Footer";
 
 
 
@@ -251,37 +252,17 @@ export default class App extends React.Component {
             })}
 
             <p>Total: R$ {this.totalValue()}</p>
-            <button onClick={this.alertAgradecimento}>
+            <BtnComprar onClick={this.alertAgradecimento}>
                     Finalizar Compra
-                  </button>
+                  </BtnComprar>
 
           </ContainerCarrinho>
 
 
-
         </TemplateMain>
-        <Footer>
-          <div className="institucional">
-            <h4>Institucional</h4>
-            <a href="#">Sobre nós</a>
-          </div>
-          <div className="contato">
-            <h4>Contato</h4>
-            <a href="#">Fale conosco</a>
-            <a href="#">Dúvidas</a>
-          </div>
 
-          <div className="redes-sociais">
-            <h4>Redes Sociais</h4>
-            <a href="https://facebook.com">
-              <img src={facebook} alt="facebook" />
-            </a>
+    <Footer></Footer>
 
-            <a href="https://instagram.com">
-            <img src={insta} alt="instagram" />
-            </a>
-          </div>
-        </Footer>
       </BodyContainer>
     );
   }
