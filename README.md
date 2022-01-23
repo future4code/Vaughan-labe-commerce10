@@ -1,6 +1,6 @@
 Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
 
-# Link do Surge: bloody-cracker.surge.sh
+# Link do Surge: https://bloody-cracker.surge.sh/
 
 
 ## Funcionalidades atuais:
