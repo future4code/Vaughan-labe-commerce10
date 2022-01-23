@@ -1,6 +1,6 @@
 Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
 
-# Link do Surge: https://bloody-cracker.surge.sh/
+# Link do Surge: https://curvy-spade.surge.sh/
 
 
 ## Funcionalidades atuais:
@@ -15,6 +15,8 @@ Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app
 ## Prints:
 ### Desktop:
 ![alt text](https://i.postimg.cc/sXJKbpSS/labspace.png)
+![image](https://user-images.githubusercontent.com/85976494/150700839-b280d65d-8205-46ed-a990-b7927ec1657a.png)
+
 
 ### Mobile:
 ![alt text](https://i.postimg.cc/rwzNyDR6/labspace-Mobile.png)
